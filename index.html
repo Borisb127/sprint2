@@ -26,9 +26,13 @@
         <section class="editor-section">
             <h2>Editor</h2>
             <input type="text" placeholder="Enter text" oninput="onSetLineTxt(this.value)">
+            <button onclick="onChangeFontSize(2)">A+</button>
+            <button onclick="onChangeFontSize(-2)">A-</button>
+            <input type="color" value="#ffffff" oninput="onSetColor(this.value)">
             <div class="canvas-container">
                 <canvas width="400" height="400"></canvas>
             </div>
+            <a href="#" onclick="onDownloadMeme(this)">Download</a>
         </section>
 
     </main>

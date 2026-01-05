@@ -39,8 +39,9 @@ function renderMeme() {
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
-        gCtx.font = '40px Arial'
+        gCtx.font = `${meme.size}px Arial`
         gCtx.textAlign = 'center'
+        gCtx.fillStyle = meme.color
         gCtx.fillText(meme.txt, gElCanvas.width / 2, 50)
     }
 }
@@ -57,3 +58,21 @@ function onSetLineTxt(txt) {
     setLineTxt(txt)
     renderMeme()
 }
+
+
+function onSetColor(color) {
+    setColor(color)
+    renderMeme()
+}
+
+function onChangeFontSize(diff) {
+    changeFontSize(diff)
+    renderMeme()
+}
+
+function onDownloadMeme(elLink) {
+    const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl
+    elLink.download = 'my_meme.jpg'
+}
+

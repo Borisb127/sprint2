@@ -8,11 +8,15 @@
 
 var gMeme = {
     selectedImgId: 4,
-    txt: 'TEST',
-    color: '#ffffff',
-    size: 40
+    selectedLineIdx: 0,
+    lines: [
+        {
+            txt: 'TEST',
+            color: '#ffffff',
+            size: 40
+        }
+    ]
 }
-
 
 
 /////////////////////////
@@ -28,18 +32,34 @@ function getMeme() {
 // SETTERS
 /////////////////////////
 
+function addLine() {
+    gMeme.lines.push({
+        txt: 'SECOND LINE',
+        color: '#ffffff',
+        size: 40
+    })
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function switchLine() {
+    gMeme.selectedLineIdx++
+    if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
+}
+
 function setLineTxt(txt) {
-    gMeme.txt = txt
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
 
+
 function setColor(color) {
-    gMeme.color = color
+    gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 
 function changeFontSize(diff) {
-    gMeme.size += diff
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.size += diff
 }
 
 function setImg(imgId) {

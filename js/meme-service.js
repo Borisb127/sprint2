@@ -11,7 +11,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'TEST',
+            txt: 'First Line',
             color: '#ffffff',
             size: 40
         }
@@ -34,7 +34,7 @@ function getMeme() {
 
 function addLine() {
     gMeme.lines.push({
-        txt: 'SECOND LINE',
+        txt: 'Second Line',
         color: '#ffffff',
         size: 40
     })

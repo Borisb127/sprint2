@@ -1,13 +1,7 @@
-* {
-    box-sizing: border-box;
-}
+@import "basics/base.css";
+@import "basics/layout.css";
 
-.debug * {
-    outline: 1px solid red;
-}
+@import "components/header.css";
+@import "components/gallery.css";
+@import "components/editor.css";
 
-
-
-.hidden {
-    display: none;
-}

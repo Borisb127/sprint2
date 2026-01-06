@@ -1,0 +1,41 @@
+/* MAIN PAGE GRID */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* gallery | editor */
+    gap: 1rem;
+
+    padding: 1rem;
+}
+
+
+/* SECTIONS */
+.gallery-section,
+.editor-section {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 2%;
+}
+
+
+
+
+/* CANVAS CONTAINER */
+.canvas-container {
+    display: flex;
+    justify-content: center;
+
+    margin: 1rem 0;
+}
+
+
+
+
+/*=================================================*/
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+}

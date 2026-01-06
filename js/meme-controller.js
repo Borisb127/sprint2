@@ -84,6 +84,43 @@ function renderMeme() {
             gCtx.fillStyle = line.color
 
             gCtx.fillText(line.txt, gElCanvas.width / 2, textY)
+
+            // draw a frame when line selected
+            if (idx === meme.selectedLineIdx) {
+                const textWidth = gCtx.measureText(line.txt).width
+                // console.log(textWidth)
+
+                // padding between text and frame border
+                const framePaddingX = 20
+                const framePaddingY = 10
+
+                // X + Y position of the frame
+                //
+                // example:
+                // canvas center = (400/2)200
+                // textWidth = 180
+                // (400/2) - (180 / 2) - 20 = 90
+                //
+                // FRAME START (90)
+                // ↓
+                // |  [ padding - (framePaddingX) ][  TEXT - (textWidth)  ][ padding ]  |
+                //                                            ↑
+                //                           center X (200) - (gElCanvas.width / 2)  
+                const frameStartX = (gElCanvas.width / 2) - (textWidth / 2) - framePaddingX
+                const frameStartY = textY - (fontSize / 2) - framePaddingY
+                const frameWidth = textWidth + framePaddingX * 2
+                const frameHeight = fontSize + framePaddingY * 2
+
+                gCtx.strokeStyle = 'white'
+                gCtx.lineWidth = 2
+
+                gCtx.strokeRect(
+                    frameStartX,
+                    frameStartY,
+                    frameWidth,
+                    frameHeight
+                )
+            }
         })
     }
 }

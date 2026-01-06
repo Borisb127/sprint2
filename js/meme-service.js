@@ -34,7 +34,7 @@ function getMeme() {
 
 function addLine() {
     gMeme.lines.push({
-        txt: 'Second Line',
+        txt: 'New Line',
         color: '#ffffff',
         size: 40
     })
@@ -44,6 +44,10 @@ function addLine() {
 function switchLine() {
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
+}
+
+function setSelectedLine(lineIdx) {
+    gMeme.selectedLineIdx = lineIdx
 }
 
 function setLineTxt(txt) {

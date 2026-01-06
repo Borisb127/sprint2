@@ -78,6 +78,8 @@ function renderMeme() {
                 // idx 2 → 40 + 2*160 = 360
                 textY = topPadding + idx * step
             }
+
+
             gCtx.font = `${fontSize}px Arial`
             gCtx.textAlign = 'center'
             gCtx.textBaseline = 'middle'
@@ -85,10 +87,18 @@ function renderMeme() {
 
             gCtx.fillText(line.txt, gElCanvas.width / 2, textY)
 
+
+            const textWidth = gCtx.measureText(line.txt).width
+            // console.log(textWidth)
+            line.posX = gElCanvas.width / 2
+            line.posY = textY
+            line.width = textWidth
+            line.height = fontSize
+
+
             // draw a frame when line selected
             if (idx === meme.selectedLineIdx) {
-                const textWidth = gCtx.measureText(line.txt).width
-                // console.log(textWidth)
+
 
                 // padding between text and frame border
                 const framePaddingX = 20
@@ -133,6 +143,53 @@ function renderMeme() {
 /////////////////////////
 
 
+function onCanvasClick(ev) {
+    // console.log(ev)
+
+    const clickX = ev.offsetX
+    const clickY = ev.offsetY
+
+    const lineIdx = getClickedLineIdx(clickX, clickY)
+    if (lineIdx === -1) return
+
+    setSelectedLine(lineIdx)
+    renderMeme()
+    updateEditor()
+}
+
+function updateEditor() {
+    const meme = getMeme()
+    const line = meme.lines[meme.selectedLineIdx]
+
+    console.log(line)
+
+    document.querySelector('#line-txt').value = line.txt
+    document.querySelector('#line-color').value = line.color
+}
+
+
+
+function getClickedLineIdx(x, y) {
+    const meme = getMeme()
+
+    for (let i = 0; i < meme.lines.length; i++) {
+        const line = meme.lines[i]
+
+        const left = line.posX - line.width / 2
+        const right = line.posX + line.width / 2
+        const top = line.posY - line.height / 2
+        const bottom = line.posY + line.height / 2
+
+        if (x >= left && x <= right && y >= top && y <= bottom) {
+            return i
+        }
+    }
+
+    return -1
+}
+
+
+
 function onAddLine() {
     console.log('on add called')
 
@@ -145,12 +202,13 @@ function onSwitchLine() {
 
     switchLine()
     renderMeme()
+    updateEditor()
 }
 
 function onSetLineTxt(txt) {
     console.log('on set line called')
+    // console.log(txt)
 
-    console.log(txt)
     setLineTxt(txt)
     renderMeme()
 }

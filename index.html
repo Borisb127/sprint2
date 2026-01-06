@@ -25,7 +25,7 @@
 
         <section class="editor-section">
             <h2>Editor</h2>
-            <input type="text" placeholder="Enter text" oninput="onSetLineTxt(this.value)">
+            <input id="line-txt" type="text" placeholder="Enter text" oninput="onSetLineTxt(this.value)">
 
             <div class="editor-controls">
                 <button onclick="onAddLine()">Add Line</button>
@@ -34,11 +34,11 @@
                 <button onclick="onChangeFontSize(2)">A+</button>
                 <button onclick="onChangeFontSize(-2)">A-</button>
 
-                <input type="color" value="#ffffff" oninput="onSetColor(this.value)">
+                <input id="line-color" type="color" value="#ffffff" oninput="onSetColor(this.value)">
             </div>
 
             <div class="canvas-container">
-                <canvas width="400" height="400"></canvas>
+                <canvas width="400" height="400" onclick="onCanvasClick(event)"></canvas>
             </div>
 
             <a href="#" onclick="onDownloadMeme(this)">Download</a>

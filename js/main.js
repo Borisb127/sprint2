@@ -2,6 +2,7 @@
 
 function onInit() {
     initMemeController()
+    updateEditor()
     renderGallery()
 
 }

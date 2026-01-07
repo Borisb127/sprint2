@@ -14,7 +14,7 @@ function renderGallery() {
         <img src="${img.url}" width="150" onclick="onImgSelect(${img.id})">
         `).join('')
     
-    document.querySelector('.gallery-section').innerHTML += strHtml
+    document.querySelector('.gallery-grid').innerHTML = strHtml
 
 }
 

@@ -1,0 +1,12 @@
+.editor-section {
+    display: grid;
+
+
+    /* make the section scroll */
+    max-height: calc(100vh - 140px);
+}
+
+
+.editor-section h2 {
+    margin: 0;
+}

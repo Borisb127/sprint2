@@ -16,7 +16,9 @@ var gImgs = [
     { id: 15, url: 'meme-imgs/meme-imgs (square)/15.jpg', keywords: ['movie', 'boromir'] },
     { id: 16, url: 'meme-imgs/meme-imgs (square)/16.jpg', keywords: ['funny', 'picard'] },
     { id: 17, url: 'meme-imgs/meme-imgs (square)/17.jpg', keywords: ['president'] },
-    { id: 18, url: 'meme-imgs/meme-imgs (square)/18.jpg', keywords: ['movie', 'kid'] }
+    { id: 18, url: 'meme-imgs/meme-imgs (square)/18.jpg', keywords: ['movie', 'kid'] },
+    { id: 19, url: 'meme-imgs/meme-imgs (various aspect ratios)/004.jpg', keywords: ['cute', 'dog'] }
+
 ]
 
 
@@ -31,4 +33,9 @@ var gImgs = [
 
 function getImgs() {
     return gImgs
+}
+
+
+function getImgById(imgId) {
+    return gImgs.find(img => img.id === imgId)
 }

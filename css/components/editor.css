@@ -1,9 +1,13 @@
 .editor-section {
     display: grid;
     grid-template-rows: auto auto auto 1fr auto;
-    gap: 0.5rem;
+    gap: 1rem;
 
+    place-items: center;
+
+    /* allows section to shrink if content is too big */
     min-height: 0;
+    /* cuts off content that goes outside the box */
     overflow: hidden;
 }
 
@@ -11,17 +15,23 @@
 
 .editor-section h2 {
     margin: 0;
+
+    color: var(--dark);
+    font-size: 1.5rem;
 }
 
 #line-txt {
-    width: 50%;
-    padding: 0.5rem;
+    width: 60%;
+    padding: 0.5rem 1rem;
 }
 
 .editor-controls {
     display: flex;
     gap: 0.5rem;
+
     flex-wrap: wrap;
+    /* wraps to next line */
+    justify-content: center;
 }
 
 .canvas-container {
@@ -29,6 +39,84 @@
     justify-content: center;
     align-items: center;
 
-    min-height: 0;
-    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    margin: 0 auto;
+
+    box-shadow: 0 5px 25px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+    /* background-color: black; */
+}
+
+.canvas-container:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+canvas {
+    display: block;
+
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+}
+
+
+.editor-section a {
+    display: inline-block;
+
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--secondary) 0%, #00b894 100%);
+    border-radius: 10px;
+
+    text-decoration: none;
+    color: white;
+
+    box-shadow: 0 4px 15px var(--shadow-download);
+
+    transition: all 0.3s ease;
+}
+
+.editor-section a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow);
+
+}
+
+.editor-section a:active {
+    transform: translateY(3px);
+}
+
+
+
+
+
+/* Custom scrollbar */
+.editor-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.editor-section::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+
+/* MOBILE */
+/*=======================================*/
+
+@media (max-width: 768px) {
+    .editor-section {
+        grid-template-rows: auto auto auto auto auto;
+
+        overflow-y: auto;
+    }
+
+    #line-txt {
+        width: 90%;
+    }
 }

@@ -8,16 +8,24 @@
 // CANVAS
 /////////////////////////
 
-let gElCanvas
-let gCtx
+var gElCanvas
+var gCtx
+var gIsMouseDown = false
 
 function initMemeController() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
 
+    // resizeCanvas()
     renderMeme()
 }
 
+
+function resizeCanvas(img) {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.clientWidth
+    gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+}
 
 
 /////////////////////////
@@ -31,12 +39,17 @@ function renderMeme() {
     // gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
 
     const meme = getMeme()
-
+    const imgData = getImgById(meme.selectedImgId)
     const elImg = new Image()
-    elImg.src = `meme-imgs/meme-imgs (square)/${meme.selectedImgId}.jpg`
+    elImg.src = imgData.url
 
 
     elImg.onload = () => {
+
+        // resize canvas to match image aspect ratio
+        resizeCanvas(elImg)
+
+        // draw image to fill the CANVAS 
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
         // all text lines + how many lines exist from the meme model

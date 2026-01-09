@@ -1,7 +1,8 @@
 .gallery-section {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 0.5rem;
+    gap: 1rem;
+
 
     min-height: 0;
     /*grid trick, allows section to shrink if Add MORE images to your gallery*/
@@ -9,22 +10,63 @@
 }
 
 .gallery-section h2 {
+    text-align: center;
+
     margin: 0;
+
+    color: var(--dark);
+    font-size: 1.5rem;
 }
 
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
-
     overflow-y: auto;
     align-content: start;
 
+    padding: 0.5rem;
 }
+
+
+/* Custom scrollbar */
+.gallery-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.gallery-grid::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+
+
 
 .gallery-grid img {
     width: 100%;
+    border-radius: 10px;
+
+
+    aspect-ratio: 1;
+    /* if image isn't square, crop it to fit (not stretch) */
+    object-fit: cover;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0px 8px var(--shadow);
 }
+
+.gallery-grid img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0px 0px var(--shadow);
+}
+
+
+.gallery-grid img:active {
+    transform: scale(0.95);
+}
+
 
 
 
@@ -36,9 +78,12 @@
     }
 }
 
+
+
+/* MOBILE */
 @media (max-width: 768px) {
     .gallery-section {
-        max-height: 20vh;
+        max-height: 25vh;
     }
 
     .gallery-grid {

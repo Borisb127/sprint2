@@ -1,0 +1,20 @@
+.main-header h1 {
+    position: relative;
+}
+
+.main-header h1::after {
+    content: '';
+
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+
+    width: 60%;
+    height: 4px;
+    border-radius: 2px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+
+}

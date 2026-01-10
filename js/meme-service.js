@@ -15,6 +15,7 @@ var gMeme = {
             color: '#ffffff',
             size: 40,
             align: 'center',
+            fontFamily: 'Arial',
             posY: null
         }
     ]
@@ -40,6 +41,7 @@ function addLine() {
         color: '#ffffff',
         size: 40,
         align: 'center',
+        fontFamily: 'Arial',
         posY: null
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
@@ -95,6 +97,11 @@ function moveLine(diff) {
     line.posY += diff
 }
 
-function setLinePosition(lineIdx, posY) {
-    gMeme.lines[lineIdx].posY = posY
+// function setLinePosition(lineIdx, posY) {
+//     gMeme.lines[lineIdx].posY = posY
+// }
+
+
+function setFontFamily(font) {
+    gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }

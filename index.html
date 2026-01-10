@@ -55,6 +55,13 @@
                     <button onclick="onChangeFontSize(2)">A+</button>
                     <button onclick="onChangeFontSize(-2)">A-</button>
                     <input id="line-color" type="color" value="#ffffff" oninput="onSetColor(this.value)">
+                    <select id="font-family" onchange="onSetFontFamily(this.value)">
+                        <option value="Arial" style="font-family: Arial">Arial</option>
+                        <option value="Impact" style="font-family: Impact">Impact</option>
+                        <option value="Comic Sans MS" style="font-family: Comic Sans MS">Comic Sans</option>
+                        <option value="Times New Roman" style="font-family: Times New Roman">Times</option>
+                        <option value="Courier New" style="font-family: Courier New">Courier</option>
+                    </select>
                 </div>
             </div>
 

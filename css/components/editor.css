@@ -38,6 +38,23 @@
     flex-wrap: wrap;
 }
 
+#font-family {
+
+    background: var(--white);
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--dark);
+
+    font-size: 0.8rem;
+
+    cursor: pointer;
+}
+
+#font-family:hover {
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+
 .canvas-container {
     display: flex;
     justify-content: center;
@@ -159,9 +176,7 @@ canvas {
         transform: none;
     }
 
-    canvas {
- 
-    }
+    canvas {}
 
     .editor-section a {
         padding: 0.5rem 1rem;

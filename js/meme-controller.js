@@ -93,7 +93,7 @@ function renderMeme() {
             }
 
 
-            gCtx.font = `${fontSize}px Arial`
+            gCtx.font = `${fontSize}px ${line.fontFamily}`
             gCtx.textAlign = line.align || 'center'
             gCtx.textBaseline = 'middle'
             gCtx.fillStyle = line.color
@@ -108,6 +108,10 @@ function renderMeme() {
             } else {
                 textX = gElCanvas.width / 2
             }
+
+            gCtx.strokeStyle = 'black'
+            gCtx.lineWidth = 4
+            gCtx.strokeText(line.txt, textX, textY)
             // gCtx.fillText(line.txt, gElCanvas.width / 2, textY)
             gCtx.fillText(line.txt, textX, textY)
 
@@ -184,7 +188,7 @@ function renderMeme() {
 
 function onCanvasClick(ev) {
     // console.log(ev)
-    
+
     if (isCurrentLineEmpty()) return
 
     const clickX = ev.offsetX
@@ -206,6 +210,7 @@ function updateEditor() {
 
     document.querySelector('#line-txt').value = line.txt
     document.querySelector('#line-color').value = line.color
+    document.querySelector('#font-family').value = line.fontFamily
 }
 
 
@@ -324,7 +329,10 @@ function onMoveLine(diff) {
     renderMeme()
 }
 
-
+function onSetFontFamily(font) {
+    setFontFamily(font)
+    renderMeme()
+}
 
 function isCurrentLineEmpty() {
     const meme = getMeme()

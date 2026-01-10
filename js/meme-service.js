@@ -13,7 +13,9 @@ var gMeme = {
         {
             txt: 'First Line',
             color: '#ffffff',
-            size: 40
+            size: 40,
+            align: 'center',
+            posY: null
         }
     ]
 }
@@ -36,7 +38,9 @@ function addLine() {
     gMeme.lines.push({
         txt: 'New Line',
         color: '#ffffff',
-        size: 40
+        size: 40,
+        align: 'center',
+        posY: null
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
@@ -68,4 +72,28 @@ function changeFontSize(diff) {
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
+}
+
+function deleteLine() {
+    if (gMeme.lines.length <= 1) return
+
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    if (gMeme.selectedLineIdx >= gMeme.lines.length) {
+        gMeme.selectedLineIdx = gMeme.lines.length - 1
+    }
+}
+
+
+function setAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align
+}
+
+function moveLine(diff) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    if (line.posY === null) return
+    line.posY += diff
+}
+
+function setLinePosition(lineIdx, posY) {
+    gMeme.lines[lineIdx].posY = posY
 }

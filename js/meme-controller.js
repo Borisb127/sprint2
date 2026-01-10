@@ -94,16 +94,30 @@ function renderMeme() {
 
 
             gCtx.font = `${fontSize}px Arial`
-            gCtx.textAlign = 'center'
+            gCtx.textAlign = line.align || 'center'
             gCtx.textBaseline = 'middle'
             gCtx.fillStyle = line.color
 
-            gCtx.fillText(line.txt, gElCanvas.width / 2, textY)
+
+            // X position depends on alignment
+            let textX
+            if (line.align === 'left') {
+                textX = 20
+            } else if (line.align === 'right') {
+                textX = gElCanvas.width - 20
+            } else {
+                textX = gElCanvas.width / 2
+            }
+            // gCtx.fillText(line.txt, gElCanvas.width / 2, textY)
+            gCtx.fillText(line.txt, textX, textY)
+
+
+
 
 
             const textWidth = gCtx.measureText(line.txt).width
             // console.log(textWidth)
-            line.posX = gElCanvas.width / 2
+            line.posX = textX
             line.posY = textY
             line.width = textWidth
             line.height = fontSize
@@ -111,11 +125,9 @@ function renderMeme() {
 
             // draw a frame when line selected
             if (idx === meme.selectedLineIdx) {
-
-
                 // padding between text and frame border
-                const framePaddingX = 20
-                const framePaddingY = 10
+                const framePaddingX = 5
+                const framePaddingY = 5
 
                 // X + Y position of the frame
                 //
@@ -129,7 +141,14 @@ function renderMeme() {
                 // |  [ padding - (framePaddingX) ][  TEXT - (textWidth)  ][ padding ]  |
                 //                                            ↑
                 //                           center X (200) - (gElCanvas.width / 2)  
-                const frameStartX = (gElCanvas.width / 2) - (textWidth / 2) - framePaddingX
+                let frameStartX
+                if (line.align === 'left') {
+                    frameStartX = textX - framePaddingX
+                } else if (line.align === 'right') {
+                    frameStartX = textX - textWidth - framePaddingX
+                } else {
+                    frameStartX = textX - (textWidth / 2) - framePaddingX
+                }
                 const frameStartY = textY - (fontSize / 2) - framePaddingY
                 const frameWidth = textWidth + framePaddingX * 2
                 const frameHeight = fontSize + framePaddingY * 2
@@ -188,8 +207,19 @@ function getClickedLineIdx(x, y) {
     for (let i = 0; i < meme.lines.length; i++) {
         const line = meme.lines[i]
 
-        const left = line.posX - line.width / 2
-        const right = line.posX + line.width / 2
+        // const left = line.posX - line.width / 2
+        // const right = line.posX + line.width / 2
+        let left, right
+        if (line.align === 'left') {
+            left = line.posX
+            right = line.posX + line.width
+        } else if (line.align === 'right') {
+            left = line.posX - line.width
+            right = line.posX
+        } else {
+            left = line.posX - line.width / 2
+            right = line.posX + line.width / 2
+        }
         const top = line.posY - line.height / 2
         const bottom = line.posY + line.height / 2
 
@@ -247,3 +277,24 @@ function onDownloadMeme(elLink) {
     elLink.download = 'my_meme.jpg'
 }
 
+function onDeleteLine() {
+    deleteLine()
+    renderMeme()
+    updateEditor()
+}
+
+function onSetAlign(align) {
+    console.log('on set align called:', align)
+
+    setAlign(align)
+    renderMeme()
+}
+
+
+
+function onMoveLine(diff) {
+    console.log('on move line called:', diff)
+
+    moveLine(diff)
+    renderMeme()
+}

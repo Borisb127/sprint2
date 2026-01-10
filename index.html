@@ -11,7 +11,7 @@
 
 <body onload="onInit()">
 
-<!-- <body class="debug" onload="onInit()"> -->
+    <!-- <body class="debug" onload="onInit()"> -->
 
 
     <main class="main-layout">
@@ -30,13 +30,32 @@
             <input id="line-txt" type="text" placeholder="Enter text" oninput="onSetLineTxt(this.value)">
 
             <div class="editor-controls">
-                <button onclick="onAddLine()">Add Line</button>
+                <!-- <button onclick="onAddLine()">Add Line</button>
                 <button onclick="onSwitchLine()">Switch Line</button>
 
                 <button onclick="onChangeFontSize(2)">A+</button>
                 <button onclick="onChangeFontSize(-2)">A-</button>
 
-                <input id="line-color" type="color" value="#ffffff" oninput="onSetColor(this.value)">
+                <input id="line-color" type="color" value="#ffffff" oninput="onSetColor(this.value)"> -->
+
+                <!-- Row 1: Line management + positioning -->
+                <div class="controls-row">
+                    <button onclick="onAddLine()">Add</button>
+                    <button onclick="onSwitchLine()">Switch</button>
+                    <button onclick="onDeleteLine()">Delete</button>
+                    <button onclick="onMoveLine(5)">↓</button>
+                    <button onclick="onMoveLine(-5)">↑</button>
+                </div>
+
+                <!-- Row 2: Text styling -->
+                <div class="controls-row">
+                    <button onclick="onSetAlign('left')">Left</button>
+                    <button onclick="onSetAlign('center')">Center</button>
+                    <button onclick="onSetAlign('right')">Right</button>
+                    <button onclick="onChangeFontSize(2)">A+</button>
+                    <button onclick="onChangeFontSize(-2)">A-</button>
+                    <input id="line-color" type="color" value="#ffffff" oninput="onSetColor(this.value)">
+                </div>
             </div>
 
             <div class="canvas-container">

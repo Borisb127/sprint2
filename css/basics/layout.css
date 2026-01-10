@@ -25,10 +25,19 @@
     animation: fadeInDown 0.6s ease;
 }
 
+.left-side {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+
+    min-height: 0;
+    overflow: hidden;
+}
 
 
 /* Sections style */
 .gallery-section,
+.saved-section,
 .editor-section {
     padding: 1.5rem;
 
@@ -43,10 +52,13 @@
     animation-delay: 0.1s;
 }
 
-.editor-section {
+.saved-section {
     animation-delay: 0.2s;
 }
 
+.editor-section {
+    animation-delay: 0.3s;
+}
 
 /* ANIMATIONS */
 @keyframes fadeInDown {
@@ -83,9 +95,9 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr;
         gap: 0.5rem;
-        
+
         padding: 0.5rem;
-        
+
         /* Prevent page scroll - everything fits in viewport */
         height: 100vh;
         overflow: hidden;
@@ -95,8 +107,27 @@
         font-size: 1.5rem;
     }
 
+
     .gallery-section,
+    .saved-section,
     .editor-section {
         padding: 0.5rem;
+        animation: none;
+    }
+
+    .left-side {
+        grid-template-rows: 1fr;
+    }
+
+    .saved-section {
+        display: none !important;
+    }
+
+    .saved-section.active {
+        display: grid !important;
+    }
+
+    .gallery-section.hidden {
+        display: none !important;
     }
 }

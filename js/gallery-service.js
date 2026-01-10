@@ -39,3 +39,18 @@ function getImgs() {
 function getImgById(imgId) {
     return gImgs.find(img => img.id === imgId)
 }
+
+
+
+/////////////////////////
+// SETTERS
+/////////////////////////
+
+function addUploadedImg(url) {
+    const newId = gImgs.length + 1
+    gImgs.unshift({
+        id: newId,
+        url: url,
+        keywords: ['uploaded']
+    })
+}

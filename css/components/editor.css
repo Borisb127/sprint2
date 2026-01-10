@@ -176,7 +176,7 @@ canvas {
         transform: none;
     }
 
-    canvas {}
+    /* canvas {} */
 
     .editor-section a {
         padding: 0.5rem 1rem;

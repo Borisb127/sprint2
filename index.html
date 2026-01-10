@@ -20,10 +20,32 @@
             <h1>Meme Generator</h1>
         </header>
 
-        <section class="gallery-section">
-            <h2>Gallery</h2>
-            <div class="gallery-grid"></div>
-        </section>
+
+        <div class="left-side">
+            <section class="gallery-section">
+                <div class="section-tabs hidden">
+                    <h2 class="active" onclick="onShowGallery()">Gallery</h2>
+                    <span>|</span>
+                    <h2 onclick="onShowSaved()">Saved</h2>
+                </div>
+                <h2 class="desktop-title">Gallery</h2>
+                <input type="file" id="upload-img" accept="image/*" onchange="onUploadImg(event)" hidden>
+                <label for="upload-img" class="upload-btn">+ Upload Image</label>
+                <div class="gallery-grid"></div>
+            </section>
+
+            <section class="saved-section">
+                <div class="section-tabs hidden">
+                    <h2 onclick="onShowGallery()">Gallery</h2>
+                    <span>|</span>
+                    <h2 class="active" onclick="onShowSaved()">Saved</h2>
+                </div>
+                <h2 class="desktop-title">Saved</h2>
+                <div class="saved-grid"></div>
+            </section>
+        </div>
+
+
 
         <section class="editor-section">
             <h2>Editor</h2>
@@ -69,14 +91,18 @@
                 <canvas width="400" height="400" onclick="onCanvasClick(event)"></canvas>
             </div>
 
-            <a href="#" onclick="onDownloadMeme(this)">Download</a>
+            <div class="button-group">
+                <button onclick="onSaveMeme()">Save</button>
+                <a href="#" onclick="onDownloadMeme(this)">Download</a>
+                <button onclick="onShareMeme()">Share</button>
+            </div>
         </section>
 
     </main>
 
 
 
-
+    <script src="js/util.service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/gallery-service.js"></script>

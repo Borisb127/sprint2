@@ -345,3 +345,10 @@ function isCurrentLineEmpty() {
     }
     return false
 }
+
+
+function onSaveMeme() {
+    saveMeme()
+    renderSavedMemes()
+    alert('Meme saved!')
+}

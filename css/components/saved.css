@@ -1,6 +1,4 @@
-.gallery-section {
-    position: relative;
-
+.saved-section {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 1rem;
@@ -11,7 +9,8 @@
     overflow: hidden;
 }
 
-.gallery-section h2 {
+
+.saved-section h2 {
     text-align: center;
 
     margin: 0;
@@ -21,7 +20,7 @@
 }
 
 
-.gallery-grid {
+.saved-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
@@ -32,13 +31,24 @@
 }
 
 
+
+.saved-grid:empty::after {
+    content: 'No saved memes yet';
+    grid-column: 1 / -1;
+
+    color: var(--dark-light);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
 /* Custom scrollbar */
-.gallery-grid::-webkit-scrollbar {
+.saved-grid::-webkit-scrollbar {
     width: 8px;
 }
 
 
-.gallery-grid::-webkit-scrollbar-thumb {
+.saved-grid::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 10px;
 }
@@ -46,7 +56,7 @@
 
 
 
-.gallery-grid img {
+.saved-grid img {
     width: 100%;
     border-radius: 10px;
 
@@ -60,46 +70,23 @@
     box-shadow: 0 0px 8px var(--shadow);
 }
 
-.gallery-grid img:hover {
+
+.saved-grid img:hover {
     transform: scale(1.08);
     box-shadow: 0 0px 0px var(--shadow);
 }
 
 
-.gallery-grid img:active {
+.saved-grid img:active {
     transform: scale(0.95);
 }
 
 
 
 
-.upload-btn {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-
-    display: grid;
-    place-items: center;
-
-    background: var(--primary);
-    padding: 0.5rem;
-    border-radius: 12px;
-
-    font-size: 1rem;
-    color: var(--white);
-
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.upload-btn:hover {
-    background: var(--primary-dark);
-    transform: scale(1.1);
-}
-
 
 @media (max-width: 1200px) {
-    .gallery-grid {
+    .saved-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
@@ -109,7 +96,7 @@
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .gallery-section {
+    .saved-section {
         display: grid;
         grid-template-rows: auto 1fr;
 
@@ -117,33 +104,13 @@
         min-height: 0;
 
         gap: 0.5rem;
-    }
 
-    .section-tabs h2 {
-        transition: all 0.2s ease;
-    }
 
-    .section-tabs h2.active {
-        color: var(--primary);
-        border-bottom: 2px solid var(--primary);
-        transform: scale(1.1);
-    }
 
-    .section-tabs.hidden {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: auto auto auto;
-        place-self: center;
-        gap: 0.5rem;
-    }
-
-    .desktop-title {
-        display: none;
     }
 
 
-
-    .gallery-section h2 {
+    .saved-section h2 {
         font-size: 1rem;
         margin: 0;
 
@@ -151,10 +118,8 @@
     }
 
 
-    .gallery-grid {
+    .saved-grid {
         /* grid-template-columns: repeat(7, 1fr); */
-        grid-column: 1 / -1;
-
         display: flex;
         flex-wrap: nowrap;
         gap: 0.5rem;
@@ -164,7 +129,16 @@
         align-items: center;
     }
 
-    .gallery-grid img {
+    .saved-grid:empty::after {
+        content: 'No saved memes yet';
+        width: 100%;
+        color: var(--dark-light);
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+
+    .saved-grid img {
         width: 60px;
         height: 60px;
 
@@ -173,31 +147,8 @@
     }
 
 
-    .gallery-grid::-webkit-scrollbar {
+    .saved-grid::-webkit-scrollbar {
         height: 4px;
         width: auto;
     }
-
-
-
-    
-.upload-btn {
-    position: absolute;
-    top: 0.5rem;
-    left: 1rem;
-
-    display: grid;
-    place-items: center;
-
-    background: var(--primary);
-    padding: 0.5rem;
-    border-radius: 12px;
-
-    font-size: 0.8rem;
-    color: var(--white);
-
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
 }

@@ -21,6 +21,10 @@ var gMeme = {
     ]
 }
 
+var gSavedMemes = []
+var gEditingMemeId = null
+
+
 
 /////////////////////////
 // GETTERS
@@ -30,6 +34,10 @@ function getMeme() {
     return gMeme
 }
 
+
+function getSavedMemes() {
+    return gSavedMemes
+}
 
 /////////////////////////
 // SETTERS
@@ -105,3 +113,39 @@ function moveLine(diff) {
 function setFontFamily(font) {
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
+
+
+function saveMeme() {
+    const canvas = document.querySelector('canvas')
+    const imgData = canvas.toDataURL()
+
+    if (gEditingMemeId) {
+        // Update existing meme
+        const idx = gSavedMemes.findIndex(meme => meme.id === gEditingMemeId)
+        if (idx !== -1) {
+            gSavedMemes[idx].img = imgData
+            gSavedMemes[idx].meme = JSON.parse(JSON.stringify(gMeme))
+        }
+    } else {
+        // Create new meme
+        const savedMeme = {
+            id: Date.now(),
+            img: imgData,
+            meme: JSON.parse(JSON.stringify(gMeme))
+        }
+        gSavedMemes.push(savedMeme)
+    }
+
+
+
+    saveToStorage('savedMemes', gSavedMemes)
+}
+
+
+function loadMeme(memeId) {
+    const savedMeme = gSavedMemes.find(meme => meme.id === memeId)
+    if (savedMeme) {
+        gMeme = JSON.parse(JSON.stringify(savedMeme.meme))
+        gEditingMemeId = memeId
+    }
+} s

@@ -153,15 +153,22 @@ function renderMeme() {
                 const frameWidth = textWidth + framePaddingX * 2
                 const frameHeight = fontSize + framePaddingY * 2
 
-                gCtx.strokeStyle = 'white'
+                gCtx.save() // Save current context state
+
+                gCtx.strokeStyle = '#6c5ce7'
                 gCtx.lineWidth = 2
 
-                gCtx.strokeRect(
-                    frameStartX,
-                    frameStartY,
-                    frameWidth,
-                    frameHeight
-                )
+                // FRAME - [6, 4] means: 6 pixels line, 4 pixels gap
+                gCtx.setLineDash([6, 4])
+
+                // FRAME - background color (semi-transparent) 
+                gCtx.fillStyle = 'rgba(255, 255, 255, 0.3)'
+                gCtx.fillRect(frameStartX, frameStartY, frameWidth, frameHeight)
+
+                // FRAME - Draw the border
+                gCtx.strokeRect(frameStartX, frameStartY, frameWidth, frameHeight)
+
+                gCtx.restore()
             }
         })
     }
@@ -177,6 +184,8 @@ function renderMeme() {
 
 function onCanvasClick(ev) {
     // console.log(ev)
+    
+    if (isCurrentLineEmpty()) return
 
     const clickX = ev.offsetX
     const clickY = ev.offsetY
@@ -236,12 +245,17 @@ function getClickedLineIdx(x, y) {
 function onAddLine() {
     console.log('on add called')
 
+    if (isCurrentLineEmpty()) return
+
     addLine()
     renderMeme()
+    updateEditor()
 }
 
 function onSwitchLine() {
     console.log('on switch called')
+
+    if (isCurrentLineEmpty()) return
 
     switchLine()
     renderMeme()
@@ -272,9 +286,20 @@ function onChangeFontSize(diff) {
 }
 
 function onDownloadMeme(elLink) {
-    const dataUrl = gElCanvas.toDataURL()
-    elLink.href = dataUrl
-    elLink.download = 'my_meme.jpg'
+
+    if (isCurrentLineEmpty()) return
+
+    const meme = getMeme()
+    meme.selectedLineIdx = -1
+
+    // Re-render without frame
+    renderMeme()
+
+    setTimeout(() => {
+        const dataUrl = gElCanvas.toDataURL()
+        elLink.href = dataUrl
+        elLink.download = 'my_meme.jpg'
+    }, 100)
 }
 
 function onDeleteLine() {
@@ -297,4 +322,18 @@ function onMoveLine(diff) {
 
     moveLine(diff)
     renderMeme()
+}
+
+
+
+function isCurrentLineEmpty() {
+    const meme = getMeme()
+    const line = meme.lines[meme.selectedLineIdx]
+    if (!line) return false
+
+    if (line.txt.trim() === '') {
+        alert("DON'T LEAVE LINE EMPTY!\nDELETE LINE IF NOT NEEDED")
+        return true
+    }
+    return false
 }

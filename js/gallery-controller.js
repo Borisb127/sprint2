@@ -13,7 +13,7 @@ function renderGallery() {
     const strHtml = imgs.map(img => `
         <img src="${img.url}" width="150" onclick="onImgSelect(${img.id})">
         `).join('')
-    
+
     document.querySelector('.gallery-grid').innerHTML = strHtml
 
 }
@@ -26,6 +26,9 @@ function renderGallery() {
 
 
 function onImgSelect(imgId) {
+
+    if (isCurrentLineEmpty()) return
+
     setImg(imgId)
 
     // document.querySelector('.gallery-section').classList.add('hidden')

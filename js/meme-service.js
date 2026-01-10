@@ -90,6 +90,7 @@ function setAlign(align) {
 
 function moveLine(diff) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
+
     if (line.posY === null) return
     line.posY += diff
 }

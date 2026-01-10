@@ -83,10 +83,38 @@
 /* MOBILE */
 @media (max-width: 768px) {
     .gallery-section {
-        max-height: 25vh;
+        max-height: 140px;
+        min-height: 0;
+
+        gap: 0.5rem;
     }
 
+    .gallery-section h2 {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+
     .gallery-grid {
-        grid-template-columns: repeat(6, 1fr);
+        /* grid-template-columns: repeat(7, 1fr); */
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+
+        padding: 0.25rem;
+
+        align-items: center;
+    }
+
+
+    .gallery-grid img {
+        width: 60px;
+        height: 60px;
+    }
+
+
+    .gallery-grid::-webkit-scrollbar {
+        height: 4px;
+        width: auto;
     }
 }

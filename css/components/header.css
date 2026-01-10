@@ -12,9 +12,14 @@
     width: 60%;
     height: 4px;
     border-radius: 2px;
+ 
 
     transform: translateX(-50%);
 
     background: linear-gradient(90deg, var(--secondary), var(--accent));
 
 }
+
+
+
+

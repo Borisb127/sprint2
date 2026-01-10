@@ -111,12 +111,47 @@ canvas {
 
 @media (max-width: 768px) {
     .editor-section {
-        grid-template-rows: auto auto auto auto auto;
+        /* Compact grid - everything fits without scroll */
+        grid-template-rows: auto auto auto 1fr auto;
+        gap: 0.5rem;
+    }
 
-        overflow-y: auto;
+    .editor-section h2 {
+        font-size: 1rem;
+        margin: 0;
     }
 
     #line-txt {
-        width: 90%;
+        width: 100%;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .editor-controls {
+        gap: 0.3rem;
+    }
+
+    .editor-controls button {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .canvas-container {
+        max-width: 70%;
+        max-height: 70%;
+    }
+
+    .canvas-container:hover {
+        transform: none;
+    }
+
+    .editor-section a {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    input[type="color"] {
+        width: 2rem;
+        height: 2rem;
     }
 }

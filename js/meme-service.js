@@ -148,4 +148,4 @@ function loadMeme(memeId) {
         gMeme = JSON.parse(JSON.stringify(savedMeme.meme))
         gEditingMemeId = memeId
     }
-} s
+}

@@ -23,8 +23,39 @@ function initMemeController() {
 
 function resizeCanvas(img) {
     const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.clientWidth
-    gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+
+    // Get available space
+    const containerWidth = elContainer.clientWidth
+
+    // Calculate what height the image WANTS to be based on aspect ratio
+    const aspectRatio = img.naturalHeight / img.naturalWidth
+    let canvasWidth = containerWidth
+    let canvasHeight = aspectRatio * containerWidth
+
+    // GET MAX ALLOWED HEIGHT
+    // On mobile, limit canvas height so buttons don't get pushed off screen
+    const editorSection = document.querySelector('.editor-section')
+    const editorHeight = editorSection.clientHeight
+
+    // Canvas container is in a grid with 1fr, calculate available space
+    // Subtract space for: h2, input, controls, button-group, gaps
+    const otherElements = editorSection.querySelector('h2').offsetHeight +
+        editorSection.querySelector('#line-txt').offsetHeight +
+        editorSection.querySelector('.editor-controls').offsetHeight +
+        editorSection.querySelector('.button-group').offsetHeight +
+        150 // gaps and padding buffer
+
+    const maxCanvasHeight = editorHeight - otherElements
+    console.log('editorHeight:', editorHeight, 'maxCanvasHeight:', maxCanvasHeight, 'canvasHeight:', canvasHeight)
+
+    // If calculated height exceeds max, scale down
+    if (canvasHeight > maxCanvasHeight && maxCanvasHeight > 100) {
+        canvasHeight = maxCanvasHeight
+        canvasWidth = canvasHeight / aspectRatio
+    }
+
+    gElCanvas.width = canvasWidth
+    gElCanvas.height = canvasHeight
 }
 
 
